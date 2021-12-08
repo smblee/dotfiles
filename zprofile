@@ -1,0 +1,10 @@
+eval $(/opt/homebrew/bin/brew shellenv)
+eval $(/usr/local/bin/brew shellenv)
+
+# pyenv
+eval "$(pyenv init -)"
+eval "$(pyenv init --path)"
+eval "$(pyenv virtualenv-init -)"
+
+# rustup
+. "$HOME/.cargo/env"
