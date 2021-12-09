@@ -25,5 +25,13 @@
     ~/.config/alacritty: alacritty
     ~/.config/lvim: lvim
 
+
+- create:
+    - ~/workspace
+    - ~/.vim/.undo
+    - ~/.vim/.backup
+    - ~/.vim/.swp
+    - ~/.cache/zsh
+
 # TODO:
 # osx/brew
