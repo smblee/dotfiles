@@ -123,7 +123,9 @@ nbrew(){
 # git
 alias g='git'
 
+# aliases
 alias ll='ls -alF'
+alias cls='clear'
 
 # nvm
  export NVM_DIR="$HOME/.nvm"
