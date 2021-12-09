@@ -7,7 +7,6 @@
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
-  - [nvm install 16.13.1 && nvm alias default 16.13.1, Installing default NVM] 
 
 - link:
   
@@ -22,6 +21,9 @@
     ~/.p10k-8color.zsh: zsh/p10k/p10k-8color.zsh
     ~/.p10k.zsh: zsh/p10k/p10k.zsh
     ~/.p10k.zsh.zwc: zsh/p10k/p10k.zsh.zwc
+
+    ~/.config/alacritty: alacritty
+    ~/.config/lvim: lvim
 
 # TODO:
 # osx/brew

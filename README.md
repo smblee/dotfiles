@@ -1,5 +1,8 @@
 # DOTFILES
 
+## How to:
+- Run ./install
+
 ## TODO:
 - [ ] brew bundle install
 - [ ] [Mac] change configuration via .osx.
