@@ -2,9 +2,6 @@
 
 set -e
 
-
-arch --arm64 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-
 intel_brew="/usr/local/bin/brew"
 m1_brew="/opt/homebrew/bin/brew"
 
@@ -14,9 +11,18 @@ install_or_update_brew() {
         arch --x86_64 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
     else
         echo "Intel Homebrew already exists. Updating..."
-        brew update
-    fi   
+        
+    fi
 
+    if 
+
+    if [ -f "$m1_brew" ]; then
+        echo "M1 Homebrew not found. Installing..."
+        arch --arm64 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)" 
+    else
+        echo "M1 Homebrew already exists. Updating..."
+        
+    fi  
 }
 
 install_or_update_brew
