@@ -6,7 +6,15 @@
 - clean: ['~']
 
 - shell:
-  - [git submodule update --init --recursive, Installing submodules]
+  - 
+    command: "./scripts/install_brew.sh"
+    description: installing Brew
+    stdout: true
+    stderr: true
+    stdin: true
+  - 
+    command: git submodule update --init --recursive
+    description: Installing submodules
 
 - link:
   
