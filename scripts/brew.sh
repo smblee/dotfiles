@@ -14,8 +14,6 @@ install_or_update_brew() {
         
     fi
 
-    if 
-
     if [ -f "$m1_brew" ]; then
         echo "M1 Homebrew not found. Installing..."
         arch --arm64 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)" 
