@@ -19,7 +19,6 @@ install_or_update_brew() {
         arch --arm64 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)" 
     else
         echo "M1 Homebrew already exists. Updating..."
-        
     fi  
 }
 
