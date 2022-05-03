@@ -126,11 +126,22 @@ alias g='git'
 # aliases
 alias ll='ls -alF'
 alias cls='clear'
+alias ws='cd ~/workspace'
+alias rel='exec zsh'
+alias mkd='mkdir'
+alias k='kubectl'
+# homebrew option
+export HOMEBREW_CASK_OPTS=--no-quarantine
 
+# pyenv m1 compatible install
+pyenv_safe_install() {
+	CFLAGS=-Wno-implicit-function-declaration CPPFLAGS="-I$(brew --prefix openssl@1.1)/include -I$(xcrun --show-sdk-path)/usr/include" LDFLAGS="-L$(brew --prefix openssl@1.1)/lib -Wno-implicit-function-declaration" pyenv install $@
+}
 # nvm
- export NVM_DIR="$HOME/.nvm"
-  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && . "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-  [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && . "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# broot
-source /Users/jmo/.config/broot/launcher/bash/br
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"

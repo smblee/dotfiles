@@ -1,0 +1,2 @@
+# remove quarantine attribute from brew cask apps
+xattr -dr com.apple.quarantine /Applications/Alacritty.app

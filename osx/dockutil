@@ -1,0 +1,19 @@
+dockutil --no-restart --remove all
+dockutil --no-restart --remove 'Messages'
+dockutil --no-restart --remove 'Maps'
+dockutil --no-restart --remove 'Photos'
+dockutil --no-restart --remove 'FaceTime'
+dockutil --no-restart --remove 'Contacts'
+dockutil --no-restart --remove 'Reminders'
+dockutil --no-restart --remove 'Notes'
+dockutil --no-restart --remove 'TV'
+dockutil --no-restart --remove 'Music'
+dockutil --no-restart --remove 'Podcasts'
+dockutil --no-restart --remove 'News'
+dockutil --no-restart --remove 'App Store'
+dockutil --no-restart --remove 'System Preferences'
+dockutil --no-restart --remove 'Launchpad'
+killall Dock
+
+echo "Success! Dock is set."
+

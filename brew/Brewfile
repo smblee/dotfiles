@@ -6,11 +6,13 @@ tap "homebrew/cask"
 tap "homebrew/cask-fonts"
 tap "homebrew/command-not-found"
 tap "homebrew/core"
+tap "planetscale/tap"
 brew "bash"
 brew "bat"
 brew "bottom"
 brew "broot"
 brew "bzip2"
+brew "dockutil"
 brew "exa"
 brew "fish"
 brew "readline"
@@ -59,6 +61,7 @@ cask "alfred"
 cask "android-ndk"
 cask "android-sdk"
 cask "android-studio"
+cask "apparency"
 cask "coconutbattery"
 cask "docker"
 cask "flutter"
@@ -70,11 +73,21 @@ cask "maccy"
 cask "notion"
 cask "postman"
 cask "private-internet-access"
+cask "qlcolorcode"
+cask "qlimagesize"
+cask "qlmarkdown"
+cask "qlstephen"
+cask "qlvideo"
+cask "quicklook-json"
+cask "quicklookase"
 cask "rectangle"
 cask "slack"
 cask "spotify"
+cask "suspicious-package"
 cask "visual-studio-code"
 cask "zoom"
+mas "Cardhop", id: 1290358394
+mas "forScore", id: 363738376
 mas "GarageBand", id: 682658836
 mas "iMovie", id: 408981434
 mas "KakaoTalk", id: 869223134
@@ -82,3 +95,4 @@ mas "Keynote", id: 409183694
 mas "MKPlayer", id: 1335612105
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
+mas "WhatsApp", id: 1147396723
