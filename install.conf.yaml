@@ -7,7 +7,7 @@
 
 - shell:
   - 
-    command: "./scripts/install_brew.sh"
+    command: "./scripts/brew.sh"
     description: installing Brew
     stdout: true
     stderr: true

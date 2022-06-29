@@ -11,7 +11,10 @@ zstyle ':z4h:' auto-update      'no'
 zstyle ':z4h:' auto-update-days '28'
 
 # Start tmux if not already in tmux.
-zstyle ':z4h:' start-tmux       command tmux -u new -A -D -t z4h
+# zstyle ':z4h:' start-tmux       command tmux -u new -A -D -t z4h
+
+# Mark up shell's output with semantic information.
+zstyle ':z4h' term-shell-integration 'yes'
 
 # Move prompt to the bottom when zsh starts and on Ctrl+L.
 zstyle ':z4h:' prompt-at-bottom 'yes'
@@ -120,6 +123,10 @@ nbrew(){
         /opt/homebrew/bin/brew $@
 }
 
+which_proc(){
+	file $(which $0)
+}
+
 # git
 alias g='git'
 
@@ -127,6 +134,7 @@ alias g='git'
 alias ll='ls -alF'
 alias cls='clear'
 alias ws='cd ~/workspace'
+alias pra='cd ~/workspace/partyround/application'
 alias rel='exec zsh'
 alias mkd='mkdir'
 alias k='kubectl'
@@ -139,8 +147,8 @@ pyenv_safe_install() {
 }
 # nvm
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+    [ -s "$(brew --prefix)/opt/nvm/nvm.sh" ] && \. "$(brew --prefix)/opt/nvm/nvm.sh" # This loads nvm
+    [ -s "$(brew --prefix)/opt/nvm/etc/bash_completion.d/nvm" ] && \. "$(brew --prefix)/opt/nvm/etc/bash_completion.d/nvm" # This loads nvm bash_completion
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
