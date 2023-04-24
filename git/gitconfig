@@ -36,7 +36,7 @@
 	remotes = remote -v
 
 	# Amend the currently staged files to the latest commit
-	amend = commit --amend --reuse-message=HEAD
+	amend = commit --amend --no-edit
 
 	# Credit an author on the latest commit
 	credit = "!f() { git commit --amend --author \"$1 <$2>\" -C HEAD; }; f"
@@ -121,6 +121,18 @@
 	trustctime = false
 	editor = vim
 
+	pager = delta
+
+
+[interactive]
+	diffFilter = delta --color-only
+[add.interactive]
+	useBuiltin = false # required for git 2.37.0
+
+[delta]
+	navigate = true    # use n and N to move between diff sections
+	light = false      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
+
 [color]
 
 	# Use colors in Git commands that are capable of colored output when
@@ -151,6 +163,8 @@
 	# Detect copies as well as renames
 	renames = copies
 
+	colorMoved = default
+
 [help]
 
 	# Automatically correct and execute mistyped commands
@@ -160,6 +174,7 @@
 
 	# Include summaries of merged commits in newly created merge commit messages
 	log = true
+	conflictstyle = diff3
 
 [push]
 	# change to maching for machines with older versions of git 1.x.x
@@ -208,3 +223,5 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+[init]
+	defaultBranch = main
