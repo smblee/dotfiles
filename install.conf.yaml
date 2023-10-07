@@ -3,42 +3,37 @@
       relink: true
       create: true
 
-- clean: ['~']
+- clean: ["~"]
 
 - shell:
-  -
-    command: "./scripts/rosetta.sh"
-    description: installing Rosetta 2
-    stdout: true
-    stderr: true
-    stdin: true
-  - 
-    command: "./scripts/brew.sh"
-    description: installing Brew
-    stdout: true
-    stderr: true
-    stdin: true
-  - 
-    command: git submodule update --init --recursive
-    description: Installing submodules
+    - command: "./scripts/rosetta.sh"
+      description: installing Rosetta 2
+      stdout: true
+      stderr: true
+      stdin: true
+    - command: "./scripts/brew.sh"
+      description: installing Brew
+      stdout: true
+      stderr: true
+      stdin: true
+    - command: git submodule update --init --recursive
+      description: Installing submodules
 
 - link:
-  
     ~/.gitconfig: git/gitconfig
-  
+
     ~/.tmux.conf: tmux/tmux.conf
 
     ~/.zprofile: zsh/zprofile
     ~/.zshenv: zsh/zshenv
     ~/.zshrc: zsh/zshrc
+    ~/.zsh_aliases: zsh/zsh_aliases
+    ~/.zsh_plugins.txt: zsh/zsh_plugins.txt
 
-    ~/.p10k-8color.zsh: zsh/p10k/p10k-8color.zsh
-    ~/.p10k.zsh: zsh/p10k/p10k.zsh
-    ~/.p10k.zsh.zwc: zsh/p10k/p10k.zsh.zwc
+    ~/.p10k.zsh: zsh/p10k.zsh
 
     ~/.config/alacritty: alacritty
     ~/.config/lvim: lvim
-
 
 - create:
     - ~/workspace
@@ -46,6 +41,5 @@
     - ~/.vim/.backup
     - ~/.vim/.swp
     - ~/.cache/zsh
-
 # TODO:
 # osx/brew

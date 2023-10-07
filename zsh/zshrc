@@ -5,66 +5,52 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+# Lines configured by zsh-newuser-install
+HISTFILE=~/.histfile
+HISTSIZE=1000000
+SAVEHIST=1000000
+
+# zsh options
+setopt HIST_EXPIRE_DUPS_FIRST
+setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_ALL_DUPS
+
+setopt HIST_IGNORE_SPACE
+setopt HIST_FIND_NO_DUPS
+setopt HIST_SAVE_NO_DUPS
+
+setopt HIST_SAVE_BY_COPY
+setopt APPEND_HISTORY
+
+setopt INC_APPEND_HISTORY
+export HISTTIMEFORMAT="[%F %T] "
+setopt EXTENDED_HISTORY
+
 # Autoload functions.
 autoload -Uz zmv
-
-# Define functions and completions.
-
-# aliases
-alias tree='lsd --tree'
-alias cat='bat'
-alias vim='nvim'
-
-alias cls='clear'
-alias ws='cd ~/workspace'
-alias rel='exec zsh'
-alias mkd='mkdir'
-mkt() {
-  mkdir -p ~/temp/"$1" && cd ~/temp/"$1" || echo "Failed to create directory"
-}
-
-
-# Set shell options: http://zsh.sourceforge.net/Doc/Release/Options.html.
 setopt glob_dots     # no special treatment for file names with a leading dot
 setopt no_auto_menu  # require an extra TAB press to open the completion menu
 
+# Utility zsh modules
+zmodload -i zsh/complist # completion with highlighting matches
+zmodload -i zsh/mathfunc # math funcs built in
+
+# Colors
+autoload -U colors && colors
+ZSH_HIGHLIGHT_HIGHLIGHTERS=( main brackets )
+
+# Antidote
+# Download Antidote, if it's not there yet.
+[[ -r ${ZDOTDIR:-~}/.antidote/antidote.zsh ]] || git clone --depth=1 https://github.com/mattmc3/antidote.git ${ZDOTDIR:-~}/.antidote
+
+# Start Antidote
+source ${ZDOTDIR:-~}/.antidote/antidote.zsh
+antidote load
 
 dot_dir=~/dotfiles
-path=(~/bin /opt/homebrew/anaconda3/bin $dot_dir/scripts $path)
 
-# p10k
-source $dot_dir/zsh/powerlevel10k/powerlevel10k.zsh-theme
-
-# brew
-arch=$(uname -m)
-if [[ $arch == x86_64* ]]; then
-  alias brew='/usr/local/bin/brew'
-elif  [[ $arch == arm* ]]; then
-  alias brew='/opt/homebrew/bin/brew'
-fi
-
-ibrew(){
-        arch -x86_64 /usr/local/bin/brew $@
-}
-
-nbrew(){
-        /opt/homebrew/bin/brew $@
-}
-
-which_proc(){
-	file $(which $0)
-}
-
-# nicer file listings
-# checks if exa command is available before setting the aliase
-if [ -x "$(command -v exa)" ]; then
-    alias ls="exa -1 --classify --group-directories-first"
-    alias ll="exa --long --header --classify --icons --group-directories-first --no-permissions"
-    alias lp="exa --long --header --classify --icons --group-directories-first"
-    alias la="exa -a --long --header --classify --icons --group-directories-first"
-    alias lt="exa --tree --long --header --classify --icons --group-directories-first"
-    alias t="exa --tree --header --classify --icons --group-directories-first"
-fi
+# init aliases
+source $dot_dir/zsh/zsh_aliases
 
 # homebrew option
 export HOMEBREW_CASK_OPTS=--no-quarantine
@@ -82,14 +68,16 @@ export VOLTA_HOME="$HOME/.volta"
 export VOLTA_FEATURE_PNPM=1
 export PATH="$VOLTA_HOME/bin:$PATH"
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-# source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-# source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-
 # Load Git completion
-zstyle ':completion:*:*:git:*' script ~/.zsh/git-completion.bash
-fpath=(~/.zsh $fpath)
+zstyle ':completion:*:*:git:*' script $dot_dir/zsh/git-completion.bash
+fpath=($dot_dir/zsh $fpath)
+
+# asdf
+. "$HOME/.asdf/asdf.sh"
+
+# append completions to fpath
+fpath=(${ASDF_DIR}/completions $fpath)
+# initialise completions with ZSH's compinit
 autoload -Uz compinit && compinit
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.

@@ -217,7 +217,7 @@
 	# rebase = true
 [user]
 	name = Bryan Lee
-	email = bryan@partyround.com
+	email = smblee14@gmail.com
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f

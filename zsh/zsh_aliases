@@ -1,0 +1,47 @@
+#!/usr/bin/env zsh
+alias tree='lsd --tree'
+alias cat='bat'
+alias vim='nvim'
+
+alias cls='clear'
+alias ws='cd ~/workspace'
+alias rel='exec zsh'
+alias mkd='mkdir'
+
+mkt() {
+  mkdir -p ~/temp/"$1" && cd ~/temp/"$1" || echo "Failed to create directory"
+}
+
+# brew
+arch=$(uname -m)
+if [[ $arch == x86_64* ]]; then
+  alias brew='/usr/local/bin/brew'
+elif  [[ $arch == arm* ]]; then
+  alias brew='/opt/homebrew/bin/brew'
+fi
+
+ibrew(){
+        arch -x86_64 /usr/local/bin/brew $@
+}
+
+nbrew(){
+        /opt/homebrew/bin/brew $@
+}
+
+which_proc(){
+	file $(which "$0")
+}
+
+# nicer file listings
+# checks if exa command is available before setting the aliase
+if [ -x "$(command -v exa)" ]; then
+    alias ls="exa -1 --classify --group-directories-first"
+    alias ll="exa --long --header --classify --icons --group-directories-first --no-permissions"
+    alias lp="exa --long --header --classify --icons --group-directories-first"
+    alias la="exa -a --long --header --classify --icons --group-directories-first"
+    alias lt="exa --tree --long --header --classify --icons --group-directories-first"
+    alias t="exa --tree --header --classify --icons --group-directories-first"
+fi
+
+alias python='python3'
+alias dr='doppler run -- '
