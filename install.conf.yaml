@@ -2,22 +2,20 @@
     link:
       relink: true
       create: true
+    shell:
+      stdout: true
+      stderr: true
+      stdin: true
+    brewfile:
+      stdout: false
+      stderr: true
 
 - clean: ["~"]
 
 - shell:
-    - command: "./scripts/rosetta.sh"
-      description: installing Rosetta 2
-      stdout: true
-      stderr: true
-      stdin: true
-    - command: "./scripts/brew.sh"
-      description: installing Brew
-      stdout: true
-      stderr: true
-      stdin: true
-    - command: git submodule update --init --recursive
-      description: Installing submodules
+    - [./scripts/rosetta.sh, installing Rosetta 2]
+    - [./scripts/brew.sh, installing Brew]
+    - [git submodule update --init --recursive, Installing submodules]
 
 - link:
     ~/.gitconfig: git/gitconfig
@@ -32,8 +30,7 @@
 
     ~/.p10k.zsh: zsh/p10k.zsh
 
-    ~/.config/alacritty: alacritty
-    ~/.config/lvim: lvim
+    # ~/.config/alacritty: cfg/alacritty
 
 - create:
     - ~/workspace
@@ -41,5 +38,10 @@
     - ~/.vim/.backup
     - ~/.vim/.swp
     - ~/.cache/zsh
+
+# Reads brewfile for packages to install
+- brewfile:
+    - brew/Brewfile
+
 # TODO:
 # osx/brew
