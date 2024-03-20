@@ -1,5 +1,3 @@
-eval "$(zellij setup --generate-auto-start zsh)"
-
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -49,22 +47,16 @@ ZSH_HIGHLIGHT_HIGHLIGHTERS=( main brackets )
 source ${ZDOTDIR:-~}/.antidote/antidote.zsh
 antidote load
 
-dot_dir=~/dotfiles
-
 # init aliases
-source $dot_dir/zsh/zsh_aliases
+source ~/.zsh_aliases
 
 # homebrew option
 export HOMEBREW_CASK_OPTS=--no-quarantine
 
-# Load Git completion
-zstyle ':completion:*:*:git:*' script $dot_dir/zsh/git-completion.bash
-fpath=($dot_dir/zsh $fpath)
+# fpath=($dot_dir/zsh $fpath)
 
-# append completions to fpath
-fpath=(${ASDF_DIR}/completions $fpath)
 # initialise completions with ZSH's compinit
-autoload -Uz compinit && compinit
+# autoload -Uz compinit && compinit
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -86,3 +78,6 @@ source "/opt/homebrew/opt/fzf/shell/completion.zsh"
 # ------------
 source "/opt/homebrew/opt/fzf/shell/key-bindings.zsh"
 
+
+eval "$(mise activate zsh)"
+export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"

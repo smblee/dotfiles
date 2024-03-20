@@ -20,6 +20,7 @@
 - link:
     ~/.gitconfig: git/gitconfig
 
+    ~/.tmux/plugins: tmux/plugins
     ~/.tmux.conf: tmux/tmux.conf
 
     ~/.zprofile: zsh/zprofile
@@ -27,18 +28,12 @@
     ~/.zshrc: zsh/zshrc
     ~/.zsh_aliases: zsh/zsh_aliases
     ~/.zsh_plugins.txt: zsh/zsh_plugins.txt
-
     ~/.p10k.zsh: zsh/p10k.zsh
 
     # ~/.config/alacritty: cfg/alacritty
 
 - create:
     - ~/workspace
-    - ~/.vim/.undo
-    - ~/.vim/.backup
-    - ~/.vim/.swp
-    - ~/.cache/zsh
-
 # Reads brewfile for packages to install
 - brewfile:
     - brew/Brewfile

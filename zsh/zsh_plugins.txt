@@ -1,9 +1,8 @@
 romkatv/powerlevel10k
 
+z-shell/F-Sy-H
 zsh-users/zsh-completions
 marlonrichert/zsh-autocomplete
 zsh-users/zsh-autosuggestions
 
 zsh-users/zsh-history-substring-search
-
-zsh-users/zsh-syntax-highlighting
