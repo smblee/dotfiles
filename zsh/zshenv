@@ -1,1 +1,6 @@
 setopt rcs
+. "$HOME/.cargo/env"
+
+export PATH="$PATH:~/.foundry/bin"
+
+export PATH="$PATH:/Users/bryan/.foundry/bin"

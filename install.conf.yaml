@@ -21,6 +21,7 @@
     ~/.gitconfig: git/gitconfig
 
     ~/.tmux/plugins: tmux/plugins
+    ~/.tmux.reset.conf: tmux/tmux.reset.conf
     ~/.tmux.conf: tmux/tmux.conf
 
     ~/.zprofile: zsh/zprofile
@@ -28,15 +29,20 @@
     ~/.zshrc: zsh/zshrc
     ~/.zsh_aliases: zsh/zsh_aliases
     ~/.zsh_plugins.txt: zsh/zsh_plugins.txt
-    ~/.p10k.zsh: zsh/p10k.zsh
+    ~/.zfunc: zsh/zfunc
 
     # ~/.config/alacritty: cfg/alacritty
+    ~/.config:
+      create: true
+      glob: true
+      path: cfg/*
+      relink: true
 
 - create:
     - ~/workspace
 # Reads brewfile for packages to install
-- brewfile:
-    - brew/Brewfile
+# - brewfile:
+#     - brew/Brewfile
 
 # TODO:
 # osx/brew

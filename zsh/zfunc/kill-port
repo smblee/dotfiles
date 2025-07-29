@@ -1,0 +1,119 @@
+kill-port() {
+    emulate -L zsh
+
+    # Helper function to get process details for a port
+    function _get_process_details() {
+        local port=$1
+        lsof -i:$port -F pcu | awk '
+            BEGIN { pid=""; user=""; cmd="" }
+            /^p/ { pid=substr($0,2) }
+            /^c/ { cmd=substr($0,2) }
+            /^u/ { user=substr($0,2) }
+            END { if(pid) printf("%s\t%s\t%s", pid, user, cmd) }'
+    }
+
+    # Helper function to kill a single port
+    function _kill_single_port() {
+        local port=$1
+        local details=$(_get_process_details $port)
+        
+        if [[ -n $details ]]; then
+            local pid=$(echo $details | cut -f1)
+            local user=$(echo $details | cut -f2)
+            local cmd=$(echo $details | cut -f3)
+            echo "Port $port:"
+            echo "  PID: $pid"
+            echo "  User: $user"
+            echo "  Command: $cmd"
+            return 0
+        else
+            echo "No process found on port $port"
+            return 1
+        fi
+    }
+
+    # Parse arguments
+    local force=0
+    local ports=()
+
+    while [[ $# -gt 0 ]]; do
+        case $1 in
+            -f|--force)
+                force=1
+                shift
+                ;;
+            -h|--help)
+                echo "Usage:"
+                echo "  kill-port [-f|--force] <port>"
+                echo "  kill-port [-f|--force] <port1> <port2> ..."
+                echo "  kill-port [-f|--force] <start>-<end>"
+                echo
+                echo "Options:"
+                echo "  -f, --force    Skip confirmation prompt"
+                echo "  -h, --help     Show this help message"
+                return 0
+                ;;
+            *)
+                ports+=($1)
+                shift
+                ;;
+        esac
+    done
+
+    # Show usage if no ports specified
+    if [[ ${#ports} -eq 0 ]]; then
+        echo "Usage:"
+        echo "  kill-port [-f|--force] <port>"
+        echo "  kill-port [-f|--force] <port1> <port2> ..."
+        echo "  kill-port [-f|--force] <start>-<end>"
+        return 1
+    fi
+
+    # Store all processes to kill
+    typeset -A processes_to_kill
+    local any_process_found=0
+
+    # First, collect all processes
+    for arg in $ports; do
+        if [[ $arg =~ ^[0-9]+-[0-9]+$ ]]; then
+            # Handle port range (e.g., 3000-3100)
+            local start=${arg%-*}
+            local end=${arg#*-}
+            for port in {$start..$end}; do
+                if _kill_single_port $port; then
+                    processes_to_kill[$port]=$(_get_process_details $port)
+                    any_process_found=1
+                fi
+            done
+        else
+            # Handle single port
+            if _kill_single_port $arg; then
+                processes_to_kill[$arg]=$(_get_process_details $arg)
+                any_process_found=1
+            fi
+        fi
+    done
+
+    # If no processes found, exit
+    if [[ $any_process_found -eq 0 ]]; then
+        echo "No processes found to kill"
+        return 1
+    fi
+
+    # Ask for confirmation unless force flag is set
+    if [[ $force -eq 0 ]]; then
+        echo "\nDo you want to kill these processes? [y/N] "
+        read -q response || return 1
+        echo
+        [[ $response =~ ^[Yy]$ ]] || { echo "Operation cancelled"; return 1 }
+    fi
+
+    # Kill processes
+    for port in ${(k)processes_to_kill}; do
+        local pid=$(echo ${processes_to_kill[$port]} | cut -f1)
+        if [[ -n $pid ]]; then
+            kill -9 $pid 2>/dev/null
+            echo "✓ Killed process on port $port (PID: $pid)"
+        fi
+    done
+}

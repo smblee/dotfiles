@@ -212,12 +212,14 @@
 	#fetch = +refs/pull/*/head:refs/remotes/origin/pull/*
 
 [commit]
+	gpgsign = true
 	# gpgsign = true
 [pull]
 	# rebase = true
 [user]
 	name = Bryan Lee
 	email = smblee14@gmail.com
+	signingkey = AFD36A8980028745
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f

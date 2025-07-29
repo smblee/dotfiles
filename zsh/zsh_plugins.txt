@@ -1,8 +1,9 @@
-romkatv/powerlevel10k
-
-z-shell/F-Sy-H
-zsh-users/zsh-completions
-marlonrichert/zsh-autocomplete
-zsh-users/zsh-autosuggestions
-
+fdw/ranger-zoxide
+fdw/yazi-zoxide-zsh
 zsh-users/zsh-history-substring-search
+zsh-users/zsh-completions
+Aloxaf/fzf-tab
+softmoth/zsh-vim-mode 
+zdharma-continuum/fast-syntax-highlighting
+zsh-users/zsh-autosuggestions
+belak/zsh-utils path:completion

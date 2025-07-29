@@ -1,7 +1,16 @@
 #!/bin/bash
 
 ## keyboard settings
+# Disable press-and-hold for keys in favor of key repeat.
 defaults write -g ApplePressAndHoldEnabled -bool false
+
+# Use AirDrop over every interface. srsly this should be a default.
+defaults write com.apple.NetworkBrowser BrowseAllInterfaces 1
+
+# Always open everything in Finder's list view. This is important.
+defaults write com.apple.Finder FXPreferredViewStyle Nlsv
+
+# Set a really fast key repeat.
 defaults write -g InitialKeyRepeat -int 10
 defaults write -g KeyRepeat -int 1
 
@@ -17,6 +26,10 @@ defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
 defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
 # Disable the warning when changing a file extension
 defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
+# Set the Finder prefs for showing a few different volumes on the Desktop.
+defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
+defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
+
 
 ## dock
 # Set the icon size of Dock items to 48 pixels
@@ -42,5 +55,12 @@ defaults write com.apple.ActivityMonitor ShowCategory -int 0
 # Sort Activity Monitor results by CPU usage
 defaults write com.apple.ActivityMonitor SortColumn -string "CPUUsage"
 defaults write com.apple.ActivityMonitor SortDirection -int 0
+
+# Set up Safari for development.
+defaults write com.apple.Safari.SandboxBroker ShowDevelopMenu -bool true
+defaults write com.apple.Safari.plist IncludeDevelopMenu -bool true
+defaults write com.apple.Safari.plist WebKitDeveloperExtrasEnabledPreferenceKey -bool true
+defaults write com.apple.Safari.plist "com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled" -bool true
+defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
 
 killall SystemUIServer

@@ -7,7 +7,8 @@ alias cls='clear'
 alias ws='cd ~/workspace'
 alias rel='exec zsh'
 alias mkd='mkdir'
-
+alias p='pnpm'
+alias cd='z'
 mkt() {
   mkdir -p ~/temp/"$1" && cd ~/temp/"$1" || echo "Failed to create directory"
 }
@@ -29,7 +30,7 @@ nbrew(){
 }
 
 which_proc(){
-	file $(which "$0")
+	file $(which "$@")
 }
 
 # nicer file listings
@@ -47,3 +48,6 @@ alias python='python3'
 
 alias ai='aichat'
 alias aie='aichat -e'
+
+
+alias kp='kill-port'
