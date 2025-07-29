@@ -70,6 +70,4 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 
 export COREPACK_ENABLE_AUTO_PIN=0
 
-. "$HOME/.langflow/uv/env"
-
 # zprof
