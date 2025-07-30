@@ -1,0 +1,14 @@
+#!/bin/bash
+
+apps=("Raycast" "Amie" "Rectangle" "Screen Studio" "Cleanshot X" "Clop")
+
+for app in "${apps[@]}"; do
+  path="/Applications/$app.app"
+  osascript <<EOF
+tell application "System Events"
+  if not (exists login item "$app") then
+    make login item at end with properties {path:"$path", hidden:false}
+  end if
+end tell
+EOF
+done
